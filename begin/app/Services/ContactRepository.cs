@@ -13,18 +13,20 @@ namespace app.Services
         private const string CacheKey = "ContactStore";
         public Contact[] GetAllContacts()
         {
+            var ctx = HttpContext.Current;
+
+            if (ctx != null)
+            {
+                return (Contact[])ctx.Cache[CacheKey];
+            }
+
             return new Contact[]
         {
-			new Contact
-			{
-				Id = 1,
-				Name = "Glenn Block"
-			},
-			new Contact
-			{
-				Id = 2,
-				Name = "Dan Roth"
-			}
+            new Contact
+            {
+                Id = 0,
+                Name = "Placeholder"
+            }
         };
         }
 
